@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
   HardHat, Smartphone, Flame, AlertTriangle, UserX,
   ArrowRightLeft, PackageSearch, Layers, PackageOpen,
-  PersonStanding, ShieldAlert, MapPin, CarFront,
+  PersonStanding, ShieldAlert, MapPin, CarFront, ExternalLink,
 } from "lucide-react";
 
 const features = [
@@ -13,6 +14,7 @@ const features = [
     color: "text-warning",
     glow: "glow-accent",
     tag: "Safety",
+    link: "/detect/helmet",
   },
   {
     icon: Smartphone,
@@ -21,6 +23,7 @@ const features = [
     color: "text-primary",
     glow: "glow-primary",
     tag: "Compliance",
+    link: "/detect/phone",
   },
   {
     icon: Flame,
