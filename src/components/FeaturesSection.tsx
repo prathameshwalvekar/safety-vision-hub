@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
   HardHat, Smartphone, Flame, AlertTriangle, UserX,
   ArrowRightLeft, PackageSearch, Layers, PackageOpen,
-  PersonStanding, ShieldAlert, MapPin, CarFront,
+  PersonStanding, ShieldAlert, MapPin, CarFront, ExternalLink,
 } from "lucide-react";
 
 const features = [
@@ -13,6 +14,7 @@ const features = [
     color: "text-warning",
     glow: "glow-accent",
     tag: "Safety",
+    link: "/detect/helmet",
   },
   {
     icon: Smartphone,
@@ -21,6 +23,7 @@ const features = [
     color: "text-primary",
     glow: "glow-primary",
     tag: "Compliance",
+    link: "/detect/phone",
   },
   {
     icon: Flame,
@@ -29,6 +32,7 @@ const features = [
     color: "text-danger",
     glow: "glow-danger",
     tag: "Emergency",
+    link: "/detect/fire-smoke",
   },
   {
     icon: AlertTriangle,
@@ -85,6 +89,7 @@ const features = [
     color: "text-warning",
     glow: "glow-accent",
     tag: "Safety",
+    link: "/detect/fall",
   },
   {
     icon: ShieldAlert,
@@ -164,6 +169,11 @@ const FeaturesSection = () => {
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   {feature.description}
                 </p>
+                {feature.link && (
+                  <Link to={feature.link} className="inline-flex items-center gap-1 mt-3 text-xs font-display text-primary hover:underline uppercase tracking-wider">
+                    Try Demo <ExternalLink className="w-3 h-3" />
+                  </Link>
+                )}
               </div>
             </motion.div>
           ))}
