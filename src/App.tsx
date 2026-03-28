@@ -5,6 +5,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import FallDetection from "./pages/FallDetection.tsx";
+import FireSmokeDetection from "./pages/FireSmokeDetection.tsx";
+import PhoneDetection from "./pages/PhoneDetection.tsx";
+import HelmetDetection from "./pages/HelmetDetection.tsx";
 
 const queryClient = new QueryClient();
 
@@ -16,6 +20,10 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/detect/fall" element={<FallDetection />} />
+          <Route path="/detect/fire-smoke" element={<FireSmokeDetection />} />
+          <Route path="/detect/phone" element={<PhoneDetection />} />
+          <Route path="/detect/helmet" element={<HelmetDetection />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

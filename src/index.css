@@ -1,3 +1,4 @@
+/* Detection page styles */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 @tailwind base;
@@ -8,45 +9,32 @@
   :root {
     --background: 220 20% 4%;
     --foreground: 210 20% 92%;
-
     --card: 220 18% 8%;
     --card-foreground: 210 20% 92%;
-
     --popover: 220 18% 8%;
     --popover-foreground: 210 20% 92%;
-
     --primary: 185 80% 50%;
     --primary-foreground: 220 20% 4%;
-
     --secondary: 220 15% 14%;
     --secondary-foreground: 210 20% 85%;
-
     --muted: 220 15% 12%;
     --muted-foreground: 215 15% 55%;
-
     --accent: 35 95% 55%;
     --accent-foreground: 220 20% 4%;
-
     --destructive: 0 72% 55%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 220 15% 16%;
     --input: 220 15% 16%;
     --ring: 185 80% 50%;
-
     --radius: 0.75rem;
-
     --success: 145 65% 45%;
     --warning: 35 95% 55%;
     --danger: 0 72% 55%;
-
     --glow-primary: 185 80% 50%;
     --glow-accent: 35 95% 55%;
     --glow-danger: 0 72% 55%;
-
     --font-display: 'JetBrains Mono', monospace;
     --font-body: 'Inter', sans-serif;
-
     --sidebar-background: 220 18% 6%;
     --sidebar-foreground: 210 20% 85%;
     --sidebar-primary: 185 80% 50%;
@@ -62,7 +50,6 @@
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground font-body antialiased;
   }
@@ -72,40 +59,32 @@
   .font-display {
     font-family: var(--font-display);
   }
-
   .font-body {
     font-family: var(--font-body);
   }
-
   .text-gradient-primary {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(185 90% 70%));
   }
-
   .text-gradient-accent {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, hsl(var(--accent)), hsl(25 100% 65%));
   }
-
   .glow-primary {
     box-shadow: 0 0 20px hsl(var(--primary) / 0.3), 0 0 60px hsl(var(--primary) / 0.1);
   }
-
   .glow-accent {
     box-shadow: 0 0 20px hsl(var(--accent) / 0.3), 0 0 60px hsl(var(--accent) / 0.1);
   }
-
   .glow-danger {
     box-shadow: 0 0 20px hsl(var(--danger) / 0.4), 0 0 60px hsl(var(--danger) / 0.15);
   }
-
   .bg-grid {
     background-image: 
       linear-gradient(hsl(var(--border) / 0.3) 1px, transparent 1px),
       linear-gradient(90deg, hsl(var(--border) / 0.3) 1px, transparent 1px);
     background-size: 60px 60px;
   }
-
   .bg-scanline {
     background: repeating-linear-gradient(
       0deg,
@@ -115,13 +94,103 @@
       hsl(var(--primary) / 0.02) 4px
     );
   }
-
   .border-glow {
     border: 1px solid hsl(var(--primary) / 0.3);
   }
-
   .card-surface {
     @apply bg-card border border-border rounded-lg;
     background: linear-gradient(135deg, hsl(var(--card)), hsl(220 18% 6%));
+  }
+}
+
+/* Detection page component styles */
+@layer components {
+  .detection-tab-btn {
+    @apply px-5 py-2.5 rounded-lg font-display text-xs tracking-wider uppercase font-semibold transition-all;
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
+  }
+  .detection-tab-btn.active {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  .detection-upload-btn {
+    @apply px-6 py-3 rounded-lg font-display text-sm tracking-wider uppercase font-semibold transition-all cursor-pointer;
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 border border-border;
+  }
+
+  .detection-detect-btn {
+    @apply px-6 py-3 rounded-lg font-display text-sm tracking-wider uppercase font-semibold transition-all;
+    @apply bg-primary text-primary-foreground hover:brightness-110 glow-primary;
+  }
+  .detection-detect-btn:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  .detection-error {
+    @apply p-4 rounded-lg border text-sm font-body;
+    @apply bg-destructive/10 border-destructive/30 text-destructive;
+  }
+
+  .detection-stat-card {
+    @apply card-surface p-4 text-center flex flex-col items-center gap-1;
+  }
+  .detection-stat-card .stat-icon {
+    @apply text-2xl;
+  }
+  .detection-stat-card .stat-value {
+    @apply font-display font-bold text-xl text-foreground;
+  }
+  .detection-stat-card .stat-label {
+    @apply text-xs text-muted-foreground uppercase tracking-wider;
+  }
+
+  .detection-item-row {
+    @apply flex items-center justify-between p-3 rounded-lg bg-secondary/50 border border-border;
+  }
+  .detection-item-row .label {
+    @apply font-display text-sm text-foreground;
+  }
+  .detection-item-row .confidence {
+    @apply font-display text-sm text-primary font-semibold;
+  }
+
+  .detection-webcam-btn {
+    @apply px-5 py-2.5 rounded-lg font-display text-xs tracking-wider uppercase font-semibold transition-all;
+  }
+  .detection-webcam-btn-primary {
+    @apply detection-webcam-btn bg-primary text-primary-foreground hover:brightness-110;
+  }
+  .detection-webcam-btn-danger {
+    @apply detection-webcam-btn bg-destructive text-destructive-foreground hover:brightness-110;
+  }
+  .detection-webcam-btn-success {
+    @apply detection-webcam-btn bg-success text-primary-foreground hover:brightness-110;
+  }
+  .detection-webcam-btn-warning {
+    @apply detection-webcam-btn bg-warning text-primary-foreground hover:brightness-110;
+  }
+
+  .detection-video-container {
+    @apply card-surface overflow-hidden relative;
+  }
+  .detection-video-container video,
+  .detection-video-container canvas {
+    @apply w-full h-auto max-h-[480px] object-contain;
+  }
+  .detection-placeholder {
+    @apply flex items-center justify-center h-64 text-muted-foreground font-body;
+  }
+
+  .detection-message-success {
+    @apply text-success font-display text-sm font-semibold;
+  }
+  .detection-message-danger {
+    @apply text-danger font-display text-sm font-semibold;
+  }
+  .detection-message-warning {
+    @apply text-warning font-display text-sm font-semibold;
+  }
+  .detection-message-info {
+    @apply text-primary font-display text-sm font-semibold;
   }
 }
