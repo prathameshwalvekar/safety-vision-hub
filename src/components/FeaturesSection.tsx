@@ -169,6 +169,11 @@ const FeaturesSection = () => {
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   {feature.description}
                 </p>
+                {feature.link && (
+                  <Link to={feature.link} className="inline-flex items-center gap-1 mt-3 text-xs font-display text-primary hover:underline uppercase tracking-wider">
+                    Try Demo <ExternalLink className="w-3 h-3" />
+                  </Link>
+                )}
               </div>
             </motion.div>
           ))}
