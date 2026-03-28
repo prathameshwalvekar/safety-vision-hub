@@ -32,6 +32,7 @@ const features = [
     color: "text-danger",
     glow: "glow-danger",
     tag: "Emergency",
+    link: "/detect/fire-smoke",
   },
   {
     icon: AlertTriangle,
@@ -88,6 +89,7 @@ const features = [
     color: "text-warning",
     glow: "glow-accent",
     tag: "Safety",
+    link: "/detect/fall",
   },
   {
     icon: ShieldAlert,
