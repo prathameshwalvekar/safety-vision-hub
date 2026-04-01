@@ -16,6 +16,8 @@ A comprehensive AI-powered safety monitoring system with multiple detection capa
 
 ## Technology Stack
 
+
+
 - **Frontend**: React, TypeScript, Tailwind CSS
 - **Backend**: Python, Flask, OpenCV, YOLO
 - **AI Models**: YOLOv8, YOLOv11, Custom LSTM classifiers
