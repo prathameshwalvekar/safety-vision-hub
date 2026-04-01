@@ -41,6 +41,7 @@ const features = [
     color: "text-warning",
     glow: "glow-accent",
     tag: "Perimeter",
+    link: "/detect/line-crossing",
   },
   {
     icon: UserX,
@@ -57,6 +58,7 @@ const features = [
     color: "text-primary",
     glow: "glow-primary",
     tag: "Traffic",
+    link: "/detect/traffic",
   },
   {
     icon: PackageSearch,
@@ -98,6 +100,7 @@ const features = [
     color: "text-primary",
     glow: "glow-primary",
     tag: "Access",
+    link: "/detect/sterile-zone",
   },
   {
     icon: CarFront,
@@ -106,6 +109,7 @@ const features = [
     color: "text-danger",
     glow: "glow-danger",
     tag: "Traffic",
+    link: "/detect/no-parking",
   },
 ];
 
