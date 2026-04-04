@@ -19,6 +19,7 @@ const HelmetWebcamSection = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const detectionIntervalRef = useRef<any>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const startWebcam = async () => {
     try {
@@ -41,6 +42,23 @@ const HelmetWebcamSection = () => {
     ctx.drawImage(v, 0, 0, c.width, c.height);
     return c.toDataURL('image/jpeg', 0.8);
   }, [isStreaming]);
+
+  const playVoiceAlert = useCallback((text: string) => {
+    if (!text) return;
+    
+    // Use browser's built-in text-to-speech
+    if ('speechSynthesis' in window) {
+      // Cancel any ongoing speech
+      window.speechSynthesis.cancel();
+      
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 0.9; // Slightly slower for clarity
+      utterance.pitch = 1.0;
+      utterance.volume = 0.8;
+      
+      window.speechSynthesis.speak(utterance);
+    }
+  }, []);
 
   const drawDetections = useCallback((data: any) => {
     if (!canvasRef.current || !videoRef.current) return;
@@ -78,9 +96,15 @@ const HelmetWebcamSection = () => {
       const result = await dr.json();
       setDetections(result.detections || []);
       setStats({ helmet: result.helmet_count || 0, no_helmet: result.no_helmet_count || 0, person: result.detections?.filter((d: any) => d.label === 'person').length || 0 });
+      
+      // Play voice announcement from backend
+      if (result.announcement) {
+        playVoiceAlert(result.announcement);
+      }
+      
       drawDetections(result);
     } catch (err) { console.error('Detection error:', err); }
-  }, [isStreaming, isDetecting, captureFrame, drawDetections]);
+  }, [isStreaming, isDetecting, captureFrame, drawDetections, playVoiceAlert]);
 
   const startDetection = async () => {
     if (!isStreaming) return;
@@ -105,6 +129,9 @@ const HelmetWebcamSection = () => {
     <div className="space-y-6">
       <div className="flex items-center gap-3 flex-wrap">
         <h3 className="font-display text-sm text-foreground uppercase tracking-wider">📹 Real-time Helmet & PPE Detection</h3>
+        <div className="flex items-center gap-2 px-3 py-1 bg-muted rounded-full">
+          {/* <span className="text-xs">🔊 Voice Alerts Active</span> */}
+        </div>
         {!isStreaming ? <button onClick={startWebcam} className="detection-webcam-btn-primary">📷 Start Webcam</button> : (
           <>
             <button onClick={stopWebcam} className="detection-webcam-btn-danger">⏹️ Stop</button>
